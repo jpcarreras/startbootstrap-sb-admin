@@ -1,41 +1,73 @@
-window.addEventListener('DOMContentLoaded', event => {
-    const datatablesSimple = document.getElementById('datatablesSimple');
-    if (datatablesSimple) {
-        fetch('/api/events')
-            .then(response => response.json())
-            .then(data => {
-                // Ahora que tenemos los datos, inicializamos DataTables
-                let dataTable = new simpleDatatables.DataTable(datatablesSimple, {
-                    data: {
-                        headings: [
-                            "OID",
-                            "EventTime",
-                            "MajorCode",
-                            "MinorCode",
-                            "DeviceName",
-                            "Acciones tomadas",
-                            "Tipo de alarma"
-                        ],
-                        data: data.map(item => [
-                            item.OID,
-                            item.EventTime,
-                            item.MajorCode,
-                            item.MinorCode,
-                            item.DeviceName,
-                            item['Acciones tomadas'],
-                            item['Tipo de alarma']
-                        ])
-                    },
-                    // Añadimos la configuración de idioma aquí
-                    language: {
-                        "emptyTable": "No hay datos disponibles en la tabla",
-                        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
-                        "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
-                        // Añade aquí el resto de la localización según sea necesario
-                    }
-                });
-            })
-            .catch(error => console.error('Error al cargar los eventos:', error));
-    }
-    
+let dataTable; // Variable para almacenar la instancia de DataTable
+let dataTableIsInitialized = false; // Bandera para controlar la inicialización
+
+document.addEventListener('DOMContentLoaded', async function () {
+    await initDataTable();
 });
+
+const initDataTable = async () => {
+    if (dataTableIsInitialized && dataTable) {
+        dataTable.destroy(); // Destruimos la instancia anterior
+    }
+
+    try {
+        const response = await fetch('/api/events');
+        const data = await response.json();
+
+        // Preparamos los datos para DataTables
+        var transformedData = data.map(item => [
+            item.OID,
+            item.EventTime,
+            item.MajorCode,
+            item.MinorCode,
+            item.DeviceName,
+            item['Acciones tomadas'],
+            item['Tipo de alarma']
+        ]);
+
+        // Opciones de DataTable personalizadas
+        const dataTableOptions = {
+            
+            data: transformedData,
+            columns: [
+                { title: "OID" },
+                { title: "EventTime" },
+                { title: "MajorCode" },
+                { title: "MinorCode" },
+                { title: "DeviceName" },
+                { title: "Acciones tomadas" },
+                { title: "Tipo de alarma" }
+            ],
+            columnDefs: [
+                { className: "centered", targets: [0, 1, 2, 3, 4, 5, 6] },
+                { orderable: false, targets: [5, 6] },
+                { searchable: true, targets: [4] },
+                
+            ],
+            searchable: true, targets: [4] ,
+            pageLength: 10, // Cambiado según preferencia
+            destroy: true, // Asegura que podemos reinicializar sin problemas
+            language: {
+                lengthMenu: "Mostrar _MENU_ registros por página",
+                zeroRecords: "Ningún usuario encontrado",
+                info: "Mostrando de _START_ a _END_ registros de un total de _TOTAL_",
+                infoEmpty: "Ningún usuario encontrado",
+                infoFiltered: "(filtrados desde _MAX_ registros totales)",
+                search: "Buscar:",
+                loadingRecords: "Cargando...",
+                paginate: {
+                    first: "Primero",
+                    last: "Último",
+                    next: "Siguiente",
+                    previous: "Anterior"
+                }
+            }
+        };
+
+        // Inicializamos DataTables con las opciones personalizadas
+        dataTable = $('#datatablesSimple2').DataTable(dataTableOptions);
+        dataTableIsInitialized = true; // Marcamos como inicializada
+    } catch (error) {
+        console.error('Error al cargar los eventos:', error);
+    }
+};

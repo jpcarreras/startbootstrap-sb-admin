@@ -7,10 +7,27 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Dashboard - DeLaval VMS</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        
+        
        
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <link href="css/styles.css" rel="stylesheet" />
+        <!-- Responsive DataTables CSS -->
+t">
+        <!-- Responsive DataTables CSS -->
+        <link href="https://cdn.datatables.net/responsive/2.2.9/css/responsive.dataTables.min.css" rel="stylesheet">
+
+        <!-- jQuery (Necesario para DataTables) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.0/css/dataTables.dataTables.css" /> <!-- Estilo de la tabla-->
+        <!-- Responsive DataTables JS -->
+        <style>
+        #datatablesSimple2 th, #datatablesSimple2 td {
+            text-align: center;
+            width: auto;
+        }
+</style>
+
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -48,18 +65,18 @@
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                Layouts
+                                Rendimiento
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
+                                    <a class="nav-link" href="layout-static.html">Rendimiento de robots</a>
+                                    <a class="nav-link" href="layout-sidenav-light.html">Graficos de robots</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Pages
+                                Otros
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
@@ -91,11 +108,11 @@
                             <div class="sb-sidenav-menu-heading">Addons</div>
                             <a class="nav-link" href="charts.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                                Charts
+                                Soporte DeLaval
                             </a>
                             <a class="nav-link" href="tables.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                                Tables
+                                ....
                             </a>
                         </div>
                     </div>
@@ -109,7 +126,7 @@
             <div id="layoutSidenav_content">
                 <main>
                     <div class="container-fluid px-4">
-                        <h1 class="mt-4">Dashboard</h1>
+                        <h1 class="mt-4">Tablero VMS</h1>
                         <ol class="breadcrumb mb-4">
                             <li class="breadcrumb-item active">Dashboard</li>
                         </ol>
@@ -184,35 +201,8 @@
                                 Alarmas de lavado últimas 24 horas
                             </div>
                             
-                            <div class="card-body">
-                                
-                                <table id="datatablesSimple" >
-                                    <thead>
-                                        <tr>
-                                            <th>OID</th>
-                                            <th>EventTime</th>
-                                            <th>MajorCode</th>
-                                            <th>MinorCode</th>
-                                            <th>DeviceName</th>
-                                            <th>Acciones tomadas</th>
-                                            <th>Tipo de alarma</th>
-                                            
-                                        </tr>
-                                    </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>OID</th>
-                                            <th>EventTime</th>
-                                            <th>MajorCode</th>
-                                            <th>MinorCode</th>
-                                            <th>DeviceName</th>
-                                            <th>Acciones tomadas</th>
-                                            <th>Tipo de alarma</th>
-                                        </tr>
-                                    </tfoot>
-                                    <tbody>
-                                        
-                                    </tbody>
+                            <div  >
+                                <table id="datatablesSimple2" class="table-responsive">
                                 </table>
                             </div>
                         </div>
@@ -237,11 +227,14 @@
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
-        <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+        <script src="assets/demo/chart-bar-demo.js"></script> 
         <script src="js/datatables-simple-demo.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+        <script src="https://cdn.datatables.net/2.0.0/js/dataTables.js"></script>
         
-        
+
+
             
     </body>
 </html>
