@@ -43,14 +43,14 @@ app.get('/api/events', async (req, res) => {
     try {
         const pool = await sql.connect(config);
         const result = await pool.request().query(`
-        SELECT        TOP (100) PERCENT dbo.SystemEvent.OID, dbo.SystemEvent.EventTime, dbo.SystemEvent.MajorCode, dbo.SystemEvent.MinorCode,  dbo.Device.DeviceName,  
+        SELECT        TOP (100) PERCENT dbo.SystemEvent.OID, CONVERT(varchar, dbo.SystemEvent.EventTime, 103) + ' ' + CONVERT(varchar, dbo.SystemEvent.EventTime, 108) AS EventTime, dbo.SystemEvent.MajorCode, dbo.SystemEvent.MinorCode,  dbo.Device.DeviceName,  
                         
         CASE  -- Aquí se utiliza CASE para definir los valores de 'Incompleto'
-        WHEN dbo.SystemEvent.Severity = 0 THEN 'Ninguno'
-        WHEN dbo.SystemEvent.Severity = 1 THEN 'Confirmado'
-        WHEN dbo.SystemEvent.Severity = 2 THEN 'Limpiado'
-        WHEN dbo.SystemEvent.Severity = 3 THEN 'Si'
-        WHEN dbo.SystemEvent.Severity = 4 THEN 'No'
+        WHEN dbo.Alarm.AckType = 0 THEN 'Ninguno'
+        WHEN dbo.Alarm.AckType = 1 THEN 'Confirmado'
+        WHEN dbo.Alarm.AckType = 2 THEN 'Limpiado'
+        WHEN dbo.Alarm.AckType = 3 THEN 'Si'
+        WHEN dbo.Alarm.AckType = 4 THEN 'No'
     END AS [Acciones tomadas],
             
              CASE  -- Aquí se utiliza CASE para definir los valores de 'Incompleto'

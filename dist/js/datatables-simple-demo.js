@@ -25,6 +25,13 @@ window.addEventListener('DOMContentLoaded', event => {
                             item['Acciones tomadas'],
                             item['Tipo de alarma']
                         ])
+                    },
+                    // Añadimos la configuración de idioma aquí
+                    language: {
+                        "emptyTable": "No hay datos disponibles en la tabla",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ entradas",
+                        "infoEmpty": "Mostrando 0 a 0 de 0 entradas",
+                        // Añade aquí el resto de la localización según sea necesario
                     }
                 });
             })
