@@ -37,4 +37,5 @@ window.addEventListener('DOMContentLoaded', event => {
             })
             .catch(error => console.error('Error al cargar los eventos:', error));
     }
+    
 });
