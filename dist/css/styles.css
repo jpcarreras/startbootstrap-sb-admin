@@ -1967,6 +1967,9 @@ progress {
     -webkit-overflow-scrolling: touch;
   }
 }
+
+
+
 .form-label {
   margin-bottom: 0.5rem;
 }
@@ -11085,6 +11088,7 @@ body {
 
 .datatable-wrapper .datatable-container {
   font-size: 0.875rem;
+  width: auto;
 }
 
 .datatable-wrapper.no-header .datatable-container {
