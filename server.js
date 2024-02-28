@@ -65,7 +65,7 @@ app.get('/api/events', async (req, res) => {
 FROM            dbo.Alarm INNER JOIN
              dbo.SystemEvent ON dbo.Alarm.OID = dbo.SystemEvent.OID INNER JOIN
              dbo.Device ON dbo.Alarm.SourceId = dbo.Device.OID
-WHERE (dbo.SystemEvent.EventTime > DATEADD(HOUR, -160, GETDATE())) AND (MajorCode = 5) AND (Severity = 5)
+WHERE (dbo.SystemEvent.EventTime > DATEADD(HOUR, -15, GETDATE())) AND (MajorCode = 5) AND (Severity = 5)
 
 ORDER BY dbo.SystemEvent.EventTime
         `);
